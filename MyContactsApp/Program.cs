@@ -1,3 +1,4 @@
+using System.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MyContactsApp.Data;
@@ -29,8 +30,8 @@ builder.Services.AddAuthentication(options =>
     .AddOpenIdConnect("google", options =>
     {
         options.Authority = "https://accounts.google.com";
-        options.ClientId = "470390712506-rfaal7tvpqtpcpeacqtmi00jqedp3f31.apps.googleusercontent.com";
-        options.ClientSecret = "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";
+        options.ClientId = builder.Configuration["GoogleOath0:ClientId"];
+        options.ClientSecret = builder.Configuration["GoogleOath0:ClientSecret"];
         options.CallbackPath = "/auth";
         options.SaveTokens = true;
     });
