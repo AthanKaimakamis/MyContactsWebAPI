@@ -1,3 +1,3 @@
-.gitignore
-appsettings.Development.json
-appsettings.json
+MyContactsApp/.gitignore
+MyContactsApp/appsettings.Development.json
+MyContactsApp/appsettings.json
