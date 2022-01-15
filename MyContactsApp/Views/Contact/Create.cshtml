@@ -1,0 +1,97 @@
+@using MyContactsApp.Utilities
+@model MyContactsApp.Models.Contact
+@{
+    ViewBag.Title = "Create Contact";
+    Layout = "_Layout";
+
+    List<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
+}
+<input class="visually-hidden" value="@ViewBag.UserId" asp-for="UserId"/>
+<div class="container col-md-8 col-12 border rounded">
+    <div class="m-4">
+        <h2 class="text-center">Create new Contact</h2>
+    </div>
+    <div class="m-2"></div>
+    <form method="post" asp-action="Create" asp-controller="Contact" class="row gy-2 gx-3 align-items-center">
+        <div class="col-auto mb-2">
+            <label class="form-check-label">Company: </label>
+            <input asp-for="IsCompany" class="form-check-inline"/>
+        </div>
+        <div class="mb-2 row align-content-between">
+            <div class="col">
+                <input asp-for="FirstName" placeholder="first name" class="form-control"/>
+                <span asp-validation-for="FirstName" class="text-danger inline"></span>
+            </div>
+            <div class="col">
+                <input asp-for="LastName" placeholder="last name" class="form-control"/>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="m-2"></div>
+        @* @if (viewModel.PhoneNumbers.Count < 1) *@
+        @* { *@
+        
+        @{phoneNumbers.Add(new PhoneNumber());}
+        @foreach (var phone in phoneNumbers)
+        {
+            
+            <div class="mb-2 row">
+                <div class="col-sm">
+                    <select class="form-select" asp-for="@phone.PhoneType">
+                        @foreach (var name in Enum.GetNames(typeof(EPhoneTypes)))
+                        {
+                            <option value="name">@name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-9">
+                    <input type="tel" placeholder="Number" value="" asp-for="@phone.Number" class="form-control"/>
+
+                </div>
+            </div>
+            }
+        @* } *@
+        @* <div class="m-2"></div> *@
+        @* @foreach(var email in Model.Emails) *@
+        @* { *@
+        @*     <div class="mb-2 row"> *@
+        @*         <div class="col-sm"> *@
+        @*             <select class="form-select" asp-for=@email.EmailType> *@
+        @*                 @foreach (var name in Enum.GetNames(typeof(EOnlineTypes))) *@
+        @*                 { *@
+        @*                     <option value="name">@name</option> *@
+        @*                 } *@
+        @*             </select> *@
+        @*         </div> *@
+        @*         <div class="col-sm-9"> *@
+        @*             <input type="email" placeholder="Email" asp-for=@email.EmailAddress class="form-control"/> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* } *@
+        @* <div class="m-2"></div> *@
+        @* @foreach(var address in Model.Addresses) *@
+        @* { *@
+        @*     <div class="mb-2 row"></div> *@
+        @* } *@
+        @* <div class="m-2"></div> *@
+        @* @foreach(var address in Model.Pages) *@
+        @* { *@
+        @*     <div class="mb-2 row"> *@
+        @*         <div class="col-sm"> *@
+        @*             <select class="form-select" asp-for=@address.PageType> *@
+        @*                 @foreach (var name in Enum.GetNames(typeof(EOnlineTypes))) *@
+        @*                 { *@
+        @*                     <option value="name">@name</option> *@
+        @*                 } *@
+        @*             </select> *@
+        @*         </div> *@
+        @*         <div class="col-sm-9"> *@
+        @*             <input type="url" placeholder="Page URL" asp-for=@address.PageUrl class="form-control"/> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* } *@
+        <div class="m-2 row">
+            <button type="submit" class="btn btn-success">Create</button>
+        </div>
+</form>
+</div>

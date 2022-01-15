@@ -1,0 +1,45 @@
+@{
+    ViewBag.Title = "Sign-In";
+    Layout = "_Layout";
+    
+    var returnUrl = ViewData["ReturnUrl"] as string;
+    var error = TempData["error"] as string;
+}
+
+<style>              
+  input{             
+  width: 200px;      
+  min-height: 50px;  
+  font-size: 1.2rem; 
+  }                  
+</style>             
+
+<div class="container col-lg-6  col-md-8  col-12 border border-info rounded">
+  <div class="m-4">
+    <h2 class="text-info text-center">Login</h2>
+  </div>
+    <br/>
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <h4 class="alert-danger p-2">@error</h4>
+    }
+    <form action="/Login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
+      <div class="form-group mb-2">
+        <input type="text" name="email" placeholder="Email" class="form-control" required/>
+      </div>
+      <div class="col-auto mb-2">
+        <input type="password" name="password" placeholder="Password" class="form-control" required/>
+      </div>
+      <div align="center" class="form-group m-3">
+        <button type="submit" class="btn btn-success">Login</button>
+      </div>
+    </form>
+    <br/>
+    <div class="border-bottom disabled"></div>
+    <div align="center" class="m-3">
+    <button class="btn btn-outline-info"><a href="/login/google?returnUrl=@returnUrl" class="text-decoration-none text-dark">
+      Login with Google
+    </a></button>
+  </div>
+</div>
+
